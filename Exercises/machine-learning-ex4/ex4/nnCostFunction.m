@@ -76,6 +76,10 @@ fprintf('H2: %d*%d\n', size(H2,1), size(H2,2))
 fprintf('y: %d*%d\n', size(y,1), size(y,2))
 %fprintf('Y: %d*%d\n', size(Y,1), size(Y,2))
 %fprintf('J: %d*%d\n', size(J,1), size(J,2))
+J = J + lambda*(sum(sum([zeros(size(Theta1,1),1) Theta1(:,2:end)].^2))+sum(sum([zeros(size(Theta2,1),1) Theta2(:,2:end)].^2)))/(2*m);
+% th = [0;theta(2:end)];
+% J = sum(-y.*log(h2) - (o-y).*log(o-h))/m + lambda*(th'*th)/(2*m);
+% grad = (X'*(sigmoid(X*theta) - y))/m + (lambda*th)/m;
 
 % #2
 %fprintf('#2\n')
@@ -104,9 +108,7 @@ fprintf('y: %d*%d\n', size(y,1), size(y,2))
   %end
 %end
 
-% th = [0;theta(2:end)];
-% J = sum(-y.*log(h2) - (o-y).*log(o-h))/m + lambda*(th'*th)/(2*m);
-% grad = (X'*(sigmoid(X*theta) - y))/m + (lambda*th)/m;
+
 
 
 

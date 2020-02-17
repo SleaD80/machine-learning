@@ -64,12 +64,13 @@ Theta2_grad = zeros(size(Theta2));
 H1 = sigmoid([ones(m, 1) X] * Theta1');
 H2 = sigmoid([ones(m, 1) H1] * Theta2');
 
+fprintf('#1\n')
 %O = ones(m,num_labels);
-%Y = zeros(m,num_labels);
-%for i = 1:m
-  %Y(i,y(i)) = 1;
-%end
-%J = sum(sum(-Y'*log(H2) - (O-Y)'*log(O-H2)))/m;
+Y = zeros(m,num_labels);
+for i = 1:m
+  Y(i,y(i)) = 1;
+end
+J = sum(sum(-Y.*log(H2) - (1-Y).*log(1-H2)))/m;
 fprintf('H1: %d*%d\n', size(H1,1), size(H1,2))
 fprintf('H2: %d*%d\n', size(H2,1), size(H2,2))
 fprintf('y: %d*%d\n', size(y,1), size(y,2))
@@ -77,14 +78,16 @@ fprintf('y: %d*%d\n', size(y,1), size(y,2))
 %fprintf('J: %d*%d\n', size(J,1), size(J,2))
 
 % #2
-o = ones(num_labels,1);
-Y = zeros(m,num_labels);
-for i = 1:m
-  Y(i,y(i)) = 1;
-  J = J + sum(-Y(i)'.*log(H2(i)') - (1-Y(i)').*log(1-H2(i)'))/m;
-end
+%fprintf('#2\n')
+%o = ones(num_labels,1);
+%Y = zeros(m,num_labels);
+%for i = 1:m
+  %Y(i,y(i)) = 1;
+  %J = J + sum(-Y(i,:).*log(H2(i,:)) - (1-Y(i,:)).*log(1-H2(i,:)))/m;
+%end
 
 % #3+
+%fprintf('#3\n')
 %Y = zeros(m,num_labels);
 %for i = 1:m
   %Y(i,y(i)) = 1;
